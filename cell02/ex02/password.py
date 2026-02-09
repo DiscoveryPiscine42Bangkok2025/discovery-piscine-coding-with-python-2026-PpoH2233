@@ -1,6 +1,6 @@
 password = "Python is awesome"
 inp = str(input())
 if inp == password:
-    print("ACCESS GRANTED")
+    print("ACCESS GRANTED.")
 else:
-    print("ACCESS DENIED")
+    print("ACCESS DENIED.")
