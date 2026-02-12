@@ -1,3 +1,4 @@
+#!/opt/homebrew/bin/python3
 from checkmate import checkmate
 
 
