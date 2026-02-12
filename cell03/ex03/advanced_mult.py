@@ -11,7 +11,7 @@ while i <= 10:
     print("Table de " + str(i) + ": ", end="")
     j = 0
     while j <= 10:
-        print(i * j, end="")
+        print(f"{i * j}:2d", end="")
         if j < 10:
             print(" ", end="")
         j += 1
