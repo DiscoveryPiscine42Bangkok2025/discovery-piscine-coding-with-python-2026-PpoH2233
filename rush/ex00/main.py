@@ -1,133 +1,116 @@
 from checkmate import checkmate
 
-def print_board(board: str):
-    for row in board.split("\n"):
-        print(" ".join(row))
-    print()
 
-def run_test(name: str, board: str):
-    print(f"=== {name} ===")
-    print_board(board)
+def display_board(board: str) -> None:
+    rows = board.splitlines()
+    for r in rows:
+        print(" ".join(r))
+    print("-" * 30)
+
+
+def execute_case(title: str, board: str) -> None:
+    print(f"[TEST] {title}")
+    display_board(board)
     checkmate(board)
     print()
 
+
 def main():
-    # 1) Pawn check (Success)
-    board1 = """\
+
+    test_cases = [
+        # (description, board_string)
+
+        ("Pawn attacks King (Success)", """\
 R...
 .K..
 ..P.
-...."""
-    run_test("Pawn attacks King (Success)", board1)
+...."""),
 
-    # 2) No check (Fail)
-    board2 = """\
+        ("No piece attacks King (Fail)", """\
 R...
 .K..
 ....
-...."""
-    run_test("No piece attacks King (Fail)", board2)
+...."""),
 
-    # 3) Multiple kings (Error)
-    board3 = """\
+        ("Multiple Kings (Error)", """\
 K...
 ....
 ...K
-...."""
-    run_test("Multiple Kings (Error)", board3)
+...."""),
 
-    # 4) Invalid character (Error)
-    board4 = """\
+        ("Invalid Character (Error)", """\
 R...
 .K..
 ..X.
-...."""
-    run_test("Invalid Character (Error)", board4)
+...."""),
 
-    # 5) Not square (Error)
-    board5 = """\
+        ("Not Square Board (Error)", """\
 R....
 .K..
 ..P.
-...."""
-    run_test("Not Square Board (Error)", board5)
+...."""),
 
-    # 6) No King (Error)
-    board6 = """\
+        ("No King (Error)", """\
 R...
 ....
 ....
-...."""
-    run_test("No King (Error)", board6)
+...."""),
 
-    # 7) Rook attacks King vertically (Success)
-    board7 = """\
-R...
+        ("Rook attacks King vertically (Success)", """\
+.R..
 .K..
 R...
-...."""
-    run_test("Rook attacks King vertically (Success)", board7)
+...."""),
 
-    # 8) Rook attacks King horizontally (Success)
-    board8 = """\
-...R
-.K..
+        ("Rook attacks King horizontally (Success)", """\
 ....
-...."""
-    run_test("Rook attacks King horizontally (Success)", board8)
+.K.R
+....
+...."""),
 
-    # 9) Bishop attacks King (Success)
-    board9 = """\
+        ("Bishop attacks King (Success)", """\
 B...
 .K..
 ....
-...."""
-    run_test("Bishop attacks King (Success)", board9)
+...."""),
 
-    # 10) Queen attacks King diagonally (Success)
-    board10 = """\
+        ("Queen attacks King diagonally (Success)", """\
 Q...
 .K..
 ....
-...."""
-    run_test("Queen attacks King diagonally (Success)", board10)
+...."""),
 
-    # 11) Queen attacks King horizontally (Success)
-    board11 = """\
+        ("Queen attacks King horizontally (Success)", """\
 ..QK
 ....
 ....
-...."""
-    run_test("Queen attacks King horizontally (Success)", board11)
+...."""),
 
-    # 12) Pawn at top edge (Fail, cannot attack outside board)
-    board12 = """\
+        ("Pawn at top edge (Fail)", """\
 ..P.
 .K..
 ....
-...."""
-    run_test("Pawn at top edge (Fail)", board12)
+...."""),
 
-    # 13) King surrounded (Success)
-    board13 = """\
+        ("King attacked (Success)", """\
 ....
 .RK.
 .B..
-...."""
-    run_test("King attacked (Success)", board13)
+...."""),
 
-    # 14) Space normalization (Success)
-    board14 = """\
+        ("Space normalization (Success)", """\
 R...
  K..
   P.
 ....
-"""
-    run_test("Space normalization (Success)", board14)
+"""),
 
-    # 15) Empty 1x1 board with King only (Fail, no attackers)
-    board15 = "K"
-    run_test("Single King only 1x1 (Fail)", board15)
+        ("Single King only 1x1 (Fail)", "K"),
+    ]
+
+    for name, board in test_cases:
+        execute_case(name, board)
+
 
 if __name__ == "__main__":
     main()
